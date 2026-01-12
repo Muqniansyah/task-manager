@@ -1,0 +1,30 @@
+step :
+1. Buat Folder Backend
+2. npm init -
+3. installasi package
+npm install express mongoose cors dotenv
+npm install nodemon --save-dev
+4. Buat File Server. dan uji server "node server.js" lalu buka http://localhost:5000
+5. npm list mongoose
+6. buat folder model untuk mengatur mengatur BENTUK & ATURAN data
+7. buat folder routes untuk mengatur route aplikasi bukan server
+8. test backend dengan postman atau httpie. tujuannya Memastikan API benar-benar jalan, Memastikan data masuk ke database, Memastikan response sesuai harapan.
+jadi singkatnya memastikan otaknya bekerja sebelum bikin wajahnya (frontend).
+buat untuk method get, post, dan delete aja yang wajibnya.
+
+
+
+noted:
+server.js HANYA untuk:
+-Menyalakan server
+-Pasang middleware
+-Menghubungkan route
+
+analogi aplikasi :
+✔ Frontend ↔ server.js
+✔ server.js → menghubungkan frontend ke routes
+✔ Routes → logic
+✔ Logic → database
+Frontend tidak pernah langsung ke routes atau database, ia selalu lewat server.js
+
+Frontend  ⇄  server.js  ⇄  routes  ⇄  controller  ⇄  model  ⇄  MongoDB

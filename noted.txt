@@ -1,0 +1,8 @@
+jalankan backend dan frontend.
+backend : cd backend -> node server.js
+frontend : cd frontend -> npm run dev
+
+step lanjutan setelah backend:
+1. hubungkan/connect frontend ke backend yaitu Ambil data task dari backend dan tampilkan di React
+menggunakan useState dan useEffect di app.jsx
+2. tambah task dari react ke mongodb
