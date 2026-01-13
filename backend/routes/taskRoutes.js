@@ -14,12 +14,16 @@ router.get("/", async (req, res) => {
   res.json(tasks);
 });
 
-// UPDATE
+// UPDATE (title / completed / dll)
 router.put("/:id", async (req, res) => {
-  const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-  res.json(task);
+  try {
+    const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.json(updatedTask);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 // DELETE

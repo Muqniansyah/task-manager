@@ -5,4 +5,8 @@ frontend : cd frontend -> npm run dev
 step lanjutan setelah backend:
 1. hubungkan/connect frontend ke backend yaitu Ambil data task dari backend dan tampilkan di React
 menggunakan useState dan useEffect di app.jsx
-2. tambah task dari react ke mongodb
+2. tambah task dari react ke mongodb (method POST)
+3. hapus task dari react ke mongodb (method DELETE)
+4. completed task dari react ke mongodb (method PUT)
+5. edit task dari react ke mongodb (method PUT)
+6. simpan api ke .env supaya tidak hardcode, tidak susah ganti server, lebih mudah deploy, local dan production fleksibel dan aman.
