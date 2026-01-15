@@ -22,15 +22,9 @@ function App() {
       });
   }, []);
 
-  // ambil data task
-  const fetchTasks = () => {
-    fetch(`${API_URL}/tasks`)
-      .then((res) => res.json())
-      .then((data) => setTasks(data))
-      .catch((err) => console.log(err));
-  };
-
-  // function post task/tambah data
+  // ========================
+  // POST - TAMBAH TASK
+  // ========================
   const addTask = () => {
     if (!title) return;
 
@@ -45,25 +39,29 @@ function App() {
       }),
     })
       .then((res) => res.json())
-      .then(() => {
+      .then((newTask) => {
+        setTasks((prev) => [...prev, newTask]); // update state langsung
         setTitle(""); // kosongkan input
-        fetchTasks(); // refresh list/Ambil ulang data biar UI update
       })
       .catch((err) => console.error(err));
   };
 
-  // function delete task
+  // ========================
+  // DELETE TASK
+  // ========================
   const deleteTask = (id) => {
     fetch(`${API_URL}/tasks/${id}`, {
       method: "DELETE",
     })
       .then(() => {
-        fetchTasks(); // refresh list
+        setTasks((prev) => prev.filter((task) => task._id !== id)); // update state
       })
       .catch((err) => console.error(err));
   };
 
-  // function put task/toggle completed
+  // ========================
+  // PUT - TOGGLE COMPLETED
+  // ========================
   const toggleCompleted = (task) => {
     fetch(`${API_URL}/tasks/${task._id}`, {
       method: "PUT",
@@ -75,13 +73,17 @@ function App() {
       }),
     })
       .then((res) => res.json())
-      .then(() => {
-        fetchTasks(); // refresh list biar UI update
+      .then((updatedTask) => {
+        setTasks((prev) =>
+          prev.map((t) => (t._id === updatedTask._id ? updatedTask : t))
+        );
       })
       .catch((err) => console.error(err));
   };
 
-  // function put/edit task
+  // ========================
+  // PUT - EDIT TASK
+  // ========================
   const updateTask = (id) => {
     fetch(`${API_URL}/tasks/${id}`, {
       method: "PUT",
@@ -92,10 +94,15 @@ function App() {
         title: editTitle,
       }),
     })
-      .then(() => {
+      .then((res) => res.json())
+      .then((updatedTask) => {
+        setTasks((prev) =>
+          prev.map((task) =>
+            task._id === updatedTask._id ? updatedTask : task
+          )
+        );
         setEditingId(null);
         setEditTitle("");
-        fetchTasks();
       })
       .catch((err) => console.error(err));
   };
